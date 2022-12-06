@@ -5,9 +5,13 @@
 package View;
 
 import Service.impl.QLCaLamImpl;
+import Service.impl.QLNhanVienImpl;
 import ViewModel.QLCaLamReponse;
+import ViewModel.QLNhanVien;
  
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
  
@@ -22,12 +26,14 @@ public class QuanLyCaLam extends javax.swing.JFrame {
     DefaultTableModel model ; 
     DefaultComboBoxModel Cbmodel ;
      QLCaLamImpl service = new QLCaLamImpl();
+     QLNhanVienImpl nhanvienService  = new QLNhanVienImpl();
      String mawhenclick ;
      
     public QuanLyCaLam() {
         initComponents();
          model=(DefaultTableModel)Tql_CaLam.getModel();
         loadtable();
+        loadCOmb( );
     }
 //     public void loadManv(){
 //         Cbmodel = 
@@ -40,6 +46,14 @@ public class QuanLyCaLam extends javax.swing.JFrame {
             model.addRow(new Object[]{ty.getMANV(),ty.getTenNV(),ty.getCalam(),ty.getNgaylam(), 
                 ty.getGiovaoca(),ty.getGiohetca(),ty.getTrangthai()==1 ? "Đã làm":"chưa làm"});                        
         }
+    }
+    public void loadCOmb() {
+        ArrayList<QLNhanVien> list = (ArrayList<QLNhanVien>) nhanvienService.getAll();
+   Cbmodel = (DefaultComboBoxModel) CbSelectManv.getModel();
+         for (QLNhanVien qLNhanVien : list) {
+                    Cbmodel.addElement(qLNhanVien.getMaNV());
+        }
+        
     }
     
     public QLCaLamReponse getul(){
@@ -658,10 +672,7 @@ public class QuanLyCaLam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsuaActionPerformed
-        if(txt_manv.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Không được để trống");
-            
-        }
+         
         int yep = JOptionPane.showConfirmDialog(this,"ban co muon cap nhat ko","co hay ko",JOptionPane.YES_NO_OPTION);
      if(yep==JOptionPane.YES_OPTION) {
      QLCaLamReponse temp = getul();
@@ -747,12 +758,12 @@ public class QuanLyCaLam extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void BthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BthemActionPerformed
-         String calam = "[6][8][16][^\\w]";
+         String calam = "^[68]";
         if(txt_calam.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Không được để trống");
             
         }else if(txt_calam.getText().matches(calam)){
-            
+            JOptionPane.showMessageDialog(this, "");
         }
         JOptionPane.showMessageDialog(this, service.add(getul()));
         loadtable();
