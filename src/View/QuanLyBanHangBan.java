@@ -4,15 +4,23 @@
  */
 package View;
 
+import ViewModel.QLBanHang;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author FPT Shop
  */
 public class QuanLyBanHangBan extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
+    List<QLBanHang> listsMenu = new ArrayList<>();
+    DefaultTableModel dtmMenu = new DefaultTableModel();
+    QLBanHangService service = new QLBanHangImpl();
+    
+    List<QLBanHang> listOrder = new ArrayList<>();
+    DefaultTableModel dtmOrder = new DefaultTableModel();
     public QuanLyBanHangBan() {
         initComponents();
     }

@@ -5,7 +5,7 @@
 package View;
 
 import Service.impl.QLBanImpl;
-import ViewModel.QLBanHangReponse;
+import ViewModel.QLBanHang;
 import ViewModel.QLBanReponse;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

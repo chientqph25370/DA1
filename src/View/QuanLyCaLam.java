@@ -758,13 +758,18 @@ public class QuanLyCaLam extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void BthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BthemActionPerformed
-         String calam = "^[68]";
+        while (true) {            
+        String calam = "^[68]";
         if(txt_calam.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Không được để trống");
             
         }else if(txt_calam.getText().matches(calam)){
-            JOptionPane.showMessageDialog(this, "");
+            JOptionPane.showMessageDialog(this, "ko đúng định dạng");
         }
+            
+            break;
+        }
+        
         JOptionPane.showMessageDialog(this, service.add(getul()));
         loadtable();
     }//GEN-LAST:event_BthemActionPerformed
