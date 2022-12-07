@@ -83,6 +83,11 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
         jLabel5.setText("Giá tiền :");
 
         jButton12.setText("Tìm kiếm");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("Đặt hàng");
 
@@ -483,6 +488,10 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
         showDataTable(lists);
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -508,6 +517,7 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(QuanLyNguyenLieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -13,10 +13,7 @@ import ViewModel.QLNhanVien;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author FPT Shop
- */
+
 public class QuanLyNhanVien extends javax.swing.JFrame {
     
     List<QLNhanVien> lists = new ArrayList<>();
@@ -755,6 +752,18 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    public void clear(){
+        txtMa.setText("");
+        txtName.setText("");
+        txtDiaChi.setText("");
+        txtSoGioLam.setText("");
+        txtSoNgayLam.setText("");
+        txtNgaySinh.setText("");
+        txtSDT.setText("");
+        buttonGroup1.clearSelection();
+        txtSearch.setText("");
+        cbbVaiTro.setSelectedItem("Nhân viên");
+    }
     public QLNhanVien getFormData(){
         String maNV = txtMa.getText();
         String tenNV = txtName.getText();
@@ -772,18 +781,21 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, service.add(getFormData()));
         lists = service.getAll();
         showDataTable(lists);
+        clear();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         JOptionPane.showMessageDialog(this, service.update(getFormData(), txtMa.getText()));
         lists = service.getAll();
         showDataTable(lists);
+        clear();
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         JOptionPane.showMessageDialog(this, service.delete(txtMa.getText()));
         lists = service.getAll();
         showDataTable(lists);
+        clear();
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
