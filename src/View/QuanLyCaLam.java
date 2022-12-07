@@ -8,62 +8,63 @@ import Service.impl.QLCaLamImpl;
 import Service.impl.QLNhanVienImpl;
 import ViewModel.QLCaLamReponse;
 import ViewModel.QLNhanVien;
- 
+import com.sun.source.tree.BreakTree;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
- 
 import javax.swing.JOptionPane;
- import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author FPT Shop
  */
 public class QuanLyCaLam extends javax.swing.JFrame {
-    DefaultTableModel model ; 
-    DefaultComboBoxModel Cbmodel ;
-     QLCaLamImpl service = new QLCaLamImpl();
-     QLNhanVienImpl nhanvienService  = new QLNhanVienImpl();
-     String mawhenclick ;
-     
+
+    DefaultTableModel model;
+    DefaultComboBoxModel Cbmodel;
+    QLCaLamImpl service = new QLCaLamImpl();
+    QLNhanVienImpl nhanvienService = new QLNhanVienImpl();
+    String mawhenclick;
+
     public QuanLyCaLam() {
         initComponents();
-         model=(DefaultTableModel)Tql_CaLam.getModel();
+        model = (DefaultTableModel) Tql_CaLam.getModel();
         loadtable();
-        loadCOmb( );
+        loadCOmb();
     }
 //     public void loadManv(){
 //         Cbmodel = 
 //         
 //     }
-    public void loadtable(){
+
+    public void loadtable() {
         model.setRowCount(0);
-        for(QLCaLamReponse ty :service.getall()){
-            
-            model.addRow(new Object[]{ty.getMANV(),ty.getTenNV(),ty.getCalam(),ty.getNgaylam(), 
-                ty.getGiovaoca(),ty.getGiohetca(),ty.getTrangthai()==1 ? "Đã làm":"chưa làm"});                        
+        for (QLCaLamReponse ty : service.getall()) {
+
+            model.addRow(new Object[]{ty.getMANV(), ty.getTenNV(), ty.getCalam(), ty.getNgaylam(),
+                ty.getGiovaoca(), ty.getGiohetca(), ty.getTrangthai() == 1 ? "Đã làm" : "chưa làm"});
         }
     }
+
     public void loadCOmb() {
         ArrayList<QLNhanVien> list = (ArrayList<QLNhanVien>) nhanvienService.getAll();
-   Cbmodel = (DefaultComboBoxModel) CbSelectManv.getModel();
-         for (QLNhanVien qLNhanVien : list) {
-                    Cbmodel.addElement(qLNhanVien.getMaNV());
+        Cbmodel = (DefaultComboBoxModel) CbSelectManv.getModel();
+        for (QLNhanVien qLNhanVien : list) {
+            Cbmodel.addElement(qLNhanVien.getMaNV());
         }
-        
+
     }
-    
-    public QLCaLamReponse getul(){
-      return new QLCaLamReponse(txt_manv.getText(), txt_ten.getText(), txt_calam.getText(),txt_ngaylam.getText(),
-               txt_giovaoca.getText(),
-                txt_giohetca.getText(),R_dalam.isSelected()? 1:0 );
-        
-        
+
+    public QLCaLamReponse getul() {
+        return new QLCaLamReponse(txt_manv.getText(), txt_ten.getText(), txt_calam.getText(), txt_ngaylam.getText(),
+                txt_giovaoca.getText(),
+                txt_giohetca.getText(), R_dalam.isSelected() ? 1 : 0);
+
     }
-       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -672,33 +673,32 @@ public class QuanLyCaLam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsuaActionPerformed
-         
-        int yep = JOptionPane.showConfirmDialog(this,"ban co muon cap nhat ko","co hay ko",JOptionPane.YES_NO_OPTION);
-     if(yep==JOptionPane.YES_OPTION) {
-     QLCaLamReponse temp = getul();
-        temp.setMANV(mawhenclick);
-        JOptionPane.showMessageDialog(this, service.update(temp));
-        loadtable();
-     } else if (yep== JOptionPane.NO_OPTION){
-         
-      loadtable();
-     }
-         
-        
-        
+
+        int yep = JOptionPane.showConfirmDialog(this, "ban co muon cap nhat ko", "THONG BAO", JOptionPane.YES_NO_OPTION);
+        if (yep == JOptionPane.YES_OPTION) {
+            QLCaLamReponse temp = getul();
+            temp.setMANV(mawhenclick);
+            JOptionPane.showMessageDialog(this, service.update(temp));
+            loadtable();
+        } else if (yep == JOptionPane.NO_OPTION) {
+
+            loadtable();
+        }
+
+
     }//GEN-LAST:event_BsuaActionPerformed
 
     private void BxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BxoaActionPerformed
-             int yep = JOptionPane.showConfirmDialog(this,"ban co muon xoa ko","co hay ko",JOptionPane.YES_NO_OPTION);
-     if(yep==JOptionPane.YES_OPTION) {
-     QLCaLamReponse temp  = new QLCaLamReponse();
-        temp.setMANV(mawhenclick);
-        JOptionPane.showMessageDialog(this, service.delete(temp));
-        loadtable();
-     } else if (yep== JOptionPane.NO_OPTION){
-         
-      loadtable();
-     }
+        int yep = JOptionPane.showConfirmDialog(this, "ban co muon xoa ko", "THONG BAO", JOptionPane.YES_NO_OPTION);
+        if (yep == JOptionPane.YES_OPTION) {
+            QLCaLamReponse temp = new QLCaLamReponse();
+            temp.setMANV(mawhenclick);
+            JOptionPane.showMessageDialog(this, service.delete(temp));
+            loadtable();
+        } else if (yep == JOptionPane.NO_OPTION) {
+
+            loadtable();
+        }
     }//GEN-LAST:event_BxoaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -758,20 +758,38 @@ public class QuanLyCaLam extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void BthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BthemActionPerformed
-        while (true) {            
-        String calam = "^[68]";
-        if(txt_calam.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Không được để trống");
-            
-        }else if(txt_calam.getText().matches(calam)){
-            JOptionPane.showMessageDialog(this, "ko đúng định dạng");
-        }
-            
-            break;
-        }
+             try{
+        String calam = "^[68]\\s[^$qwryuopas\\[^0-9]dfhjkl!@#%&=+;'zxcvbm,.\\*/:^][i][e][n]g$";
+       String ngaylam = "	\n" +
+                 "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
+               
+               
+             if (txt_calam.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Không được để trống");
+                  
+                } else if (!txt_calam.getText().matches(calam)&& !txt_ngaylam.getText().matches(ngaylam)) {
+                    JOptionPane.showMessageDialog(this, "ko đúng định dạng, nhaapj lai");
+                      
+                }else if (txt_calam.getText().matches(calam) && txt_ngaylam.getText().matches(ngaylam) ) {
+                    JOptionPane.showMessageDialog(this, "  đúng định dạng ");
+                    JOptionPane.showMessageDialog(this, service.add(getul()));
+                     loadtable();
+                }else if(!(R_dalam.isSelected()==true )|| !( R_chualam.isSelected()==true)){
+//                
+                 JOptionPane.showMessageDialog(this, "bn chua tich trang thai");
+                    
+                }
+             }catch(Exception e ){
+          JOptionPane.showMessageDialog(this, "loi cu phap");
+                } 
+              
+           
+           
+          
         
-        JOptionPane.showMessageDialog(this, service.add(getul()));
-        loadtable();
+        
+
+
     }//GEN-LAST:event_BthemActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -820,17 +838,17 @@ public class QuanLyCaLam extends javax.swing.JFrame {
 
     private void Tql_CaLamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tql_CaLamMouseClicked
         int indexrow = Tql_CaLam.getSelectedRow();
-        mawhenclick=Tql_CaLam.getModel().getValueAt(indexrow, 0).toString();
+        mawhenclick = Tql_CaLam.getModel().getValueAt(indexrow, 0).toString();
         txt_manv.setText(Tql_CaLam.getModel().getValueAt(indexrow, 0).toString());
         txt_ten.setText(Tql_CaLam.getModel().getValueAt(indexrow, 1).toString());
         txt_calam.setText(Tql_CaLam.getModel().getValueAt(indexrow, 2).toString());
         txt_ngaylam.setText(Tql_CaLam.getModel().getValueAt(indexrow, 3).toString());
         txt_giovaoca.setText(Tql_CaLam.getModel().getValueAt(indexrow, 4).toString());
         txt_giohetca.setText(Tql_CaLam.getModel().getValueAt(indexrow, 5).toString());
-        
-        if(Tql_CaLam.getModel().getValueAt(indexrow, 6).toString().equals("hoat dong")){
+
+        if (Tql_CaLam.getModel().getValueAt(indexrow, 6).toString().equals("hoat dong")) {
             R_dalam.setSelected(true);
-        }else{
+        } else {
             R_chualam.setSelected(true);
         }
     }//GEN-LAST:event_Tql_CaLamMouseClicked
@@ -926,7 +944,4 @@ public class QuanLyCaLam extends javax.swing.JFrame {
     private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
 
-    
-
-    
 }
