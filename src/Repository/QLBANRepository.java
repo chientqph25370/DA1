@@ -53,7 +53,25 @@ public class QLBANRepository {
          
          
      }
-    
+    public boolean insert(QLBanReponse ql){
+         String insert_ban ="insert into ban(maban,ten,trangthai) values(?,?,?)";
+         try(Connection conn = DBConnect.getConnection()){
+             PreparedStatement rs = conn.prepareStatement(insert_ban);
+           rs.setString(1, ql.getMaBan());
+                rs.setString(2, ql.getTen());
+                rs.setInt(3, ql.getTrangthai());
+             
+             rs.executeUpdate();
+             return true;
+         }catch(Exception e){
+             e.printStackTrace();
+             System.out.println("loi ko the ket noi dc");
+             return false;
+         }
+         
+         
+         
+     }
 
     
     

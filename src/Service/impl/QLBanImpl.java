@@ -24,7 +24,10 @@ public class QLBanImpl implements QLBanService {
 
     @Override
     public String add(QLBanReponse br) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   if (getall.insert(br)) {
+            return "them thanh cong";
+        }
+        return "them ko thanh cong ";
     }
 
     @Override
